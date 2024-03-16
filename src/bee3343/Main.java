@@ -19,7 +19,8 @@ public class Main {
         Integer g = scan.nextInt();
 
         Integer numMuralhas = 1;
-        Integer vidaMuralhaAtual = tamanhoMuralha;
+        Integer[] muralhas = new Integer[numTitans];
+        muralhas[0] = tamanhoMuralha;
 
         for (char titan : titans) {
 
@@ -34,11 +35,17 @@ public class Main {
             if (titan == 'G') 
                 ataque = g;
 
-            vidaMuralhaAtual -= ataque;
+            for (int i = 0; i < muralhas.length; i++) {
+                
+                if (muralhas[i] >= ataque) {
+                    muralhas[i] -= ataque;
+                    break;
+                }
 
-            if (vidaMuralhaAtual < ataque) {
-                numMuralhas++;
-                vidaMuralhaAtual = tamanhoMuralha;
+                if (muralhas[i + 1] == null) {
+                    numMuralhas++;
+                    muralhas[i + 1] = tamanhoMuralha;
+                }
             }
         }
 
